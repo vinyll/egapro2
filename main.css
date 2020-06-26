@@ -72,19 +72,24 @@ label {
   color: #c00;
 }
 
+button,
 a.button {
   text-decoration: none;
   color: #fff;
   background-color: #FF0080;
-  font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   box-shadow: 0 5px 5px #999;
   padding: .5rem 3rem;
   border-radius: .5rem;
+  cursor: pointer;
 }
+button[disabled],
 a.button[disabled] {
   background-color: #bbb;
   box-shadow: none;
+}
+button:focus {
+  outline: none;
 }
 
 .row {
