@@ -49,15 +49,10 @@ function changePage(name) {
 
 function loadTemplate(name) {
   const template = document.querySelector(`[name=${name}]`)
-  try {
-    main.innerHTML = template.innerHTML
-  }
-  catch {
-    main.innerHTML = template404.innerHTML
-  }
+  main.innerHTML = template ? template.innerHTML : template404.innerHTML
   setPageTitle(main.querySelector('h1').innerHTML)
   const script = main.querySelector('script')
-  if(script) eval(script.innerText)
+  if(script) Function(`return (${script.innerText})`)()
 }
 
 function setPageTitle(title) {
