@@ -107,7 +107,7 @@
   <fieldset>
     <div class=row>
       <label for=field-annee>Année au titre de laquelle vous transmettez vos indicateurs</label>
-      <input name=annee value=2019 readonly disabled>
+      <input name=annee value="" readonly disabled>
     </div>
   </fieldset>
 
@@ -153,6 +153,11 @@
   </fieldset>
 
   <script>
+    const annee = main.querySelector('[name=date]')
+    const date = new Date()
+    annee.min = `${date.getFullYear() - 1}-01-01`
+    annee.max = `${date.getFullYear() - 1}-12-31`
+    main.querySelector('[name=annee]').value = date.getFullYear() - 1
     Array.from(main.querySelectorAll('[name=periode]')).forEach(function(radio) {
       radio.addEventListener('change', function(event) {
       const value = event.target.value
