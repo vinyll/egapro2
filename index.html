@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
 <header>
   <img src="https://solen1.enquetes.social.gouv.fr/cgi-2/HE/Image?P=1162z26z19z2A57D053F4" alt="Marianne">
@@ -11,9 +12,22 @@
     <h2>Index 2020 au titre de l'année 2019</h2>
   </hgroup>
 </header>
+<main></main>
 
-<main>
+<template name=intro>
   <h1>A propos de la transmission des indicateurs et du niveau de résultat</h1>
+
+  <p>Les informations recueillies sur ce formulaire répondent à l’obligation de transmission aux services du ministre chargé du travail des indicateurs et du niveau de résultat en matière d’écart de rémunération entre les femmes et les hommes prévue à l’article D.1142-5 du code du travail au 1er mars 2020.</p>
+
+  <p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
+
+  <nav>
+    <a class=button href="/declarant">Suivant</a>
+  </nav>
+</template>
+
+<template name=declarant>
+  <h1>Identification du déclarant pour tout contact ultérieur</h1>
 
   <p>Les informations recueillies sur ce formulaire répondent à l’obligation de transmission aux services du ministre chargé du travail des indicateurs et du niveau de résultat en matière d’écart de rémunération entre les femmes et les hommes prévue à l’article D.1142-5 du code du travail au 1er mars 2020.</p>
 
@@ -22,7 +36,25 @@
   <nav>
     <a class=button>Suivant</a>
   </nav>
-</main>
+</template>
+
+<script src="https://unpkg.com/page/page.js"></script>
+<script>
+  const main = document.querySelector('main')
+
+  page('/', function (req) {
+    const template = document.querySelector(`[name=intro]`)
+    main.innerHTML = template.innerHTML
+  })
+
+  page('/:name', function (req) {
+    const name = req.params.name
+    const template = document.querySelector(`[name=${name}]`)
+    main.innerHTML = template.innerHTML
+  })
+
+  page({ hashbang: true })
+</script>
 
 <style>
   html {
@@ -39,6 +71,10 @@
     border-radius: .3rem;
     background-color: #EDEDED;
     font-size: 15px;
+  }
+
+  template {
+    /* display: none; */
   }
 
   header {
