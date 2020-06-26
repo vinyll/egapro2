@@ -56,6 +56,8 @@ function loadTemplate(name) {
     main.innerHTML = template404.innerHTML
   }
   setPageTitle(main.querySelector('h1').innerHTML)
+  const script = main.querySelector('script')
+  if(script) eval(script.innerText)
 }
 
 function setPageTitle(title) {

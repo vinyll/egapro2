@@ -64,6 +64,9 @@ fieldset {
 fieldset:not(:last-of-type) {
   margin-bottom: 1rem;
 }
+fieldset[disabled] {
+  opacity: .5;
+}
 
 label {
   margin-right: 2rem;
@@ -100,7 +103,7 @@ button:focus {
   align-items: center;
 }
 .row > * {
-  flex: 1;
+  flex: auto;
 }
 .row:not(:last-child) {
   margin-bottom: 1rem;
