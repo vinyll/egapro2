@@ -26,12 +26,25 @@ function changePage(name) {
 
   const step = steps.indexOf(name)
   progress.value = step
-  previousButton.onclick = function() {page.redirect(`/${steps[step - 1]}`)}
-  document.forms[0].onsubmit = function(event) {
-    event.preventDefault()
-    page.redirect(`/${steps[step + 1]}`)
+
+  // "Previous" button
+  if (step > 0) {
+    previousButton.onclick = function() {page.redirect(`/${steps[step - 1]}`)}
+    previousButton.removeAttribute('disabled')
+  } else {
+    previousButton.setAttribute('disabled', 'disabled')
   }
-  step <= 0 ? previousButton.setAttribute('disabled', 'disabled') : previousButton.removeAttribute('disabled')
+  // "Next" button
+  if(step < steps.length - 1) {
+    document.forms[0].onsubmit = function(event) {
+      event.preventDefault()
+      page.redirect(`/${steps[step + 1]}`)
+    }
+    nextButton.removeAttribute('disabled')
+  }
+  else {
+    nextButton.setAttribute('disabled', 'disabled')
+  }
 }
 
 function loadTemplate(name) {

@@ -53,6 +53,7 @@ nav {
 }
 progress {
   flex: 1;
+  margin: 0 1rem;
 }
 
 fieldset {
@@ -87,6 +88,7 @@ button[disabled],
 a.button[disabled] {
   background-color: #bbb;
   box-shadow: none;
+  cursor: not-allowed;
 }
 button:focus {
   outline: none;
