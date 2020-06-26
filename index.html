@@ -14,46 +14,132 @@
 </header>
 <main></main>
 
+<nav>
+  <a class=button href="/" previous>Précédent</a>
+  <progress max=0 value=0></progress>
+  <a class=button href="/" next>Suivant</a>
+</nav>
+
 <template name=intro>
   <h1>A propos de la transmission des indicateurs et du niveau de résultat</h1>
 
   <p>Les informations recueillies sur ce formulaire répondent à l’obligation de transmission aux services du ministre chargé du travail des indicateurs et du niveau de résultat en matière d’écart de rémunération entre les femmes et les hommes prévue à l’article D.1142-5 du code du travail au 1er mars 2020.</p>
 
   <p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
-
-  <nav>
-    <a class=button href="/declarant">Suivant</a>
-  </nav>
 </template>
+
 
 <template name=declarant>
   <h1>Identification du déclarant pour tout contact ultérieur</h1>
 
-  <p>Les informations recueillies sur ce formulaire répondent à l’obligation de transmission aux services du ministre chargé du travail des indicateurs et du niveau de résultat en matière d’écart de rémunération entre les femmes et les hommes prévue à l’article D.1142-5 du code du travail au 1er mars 2020.</p>
+  <form>
+    <fieldset>
+      <!-- fieldset display flex can't work in Chromium -->
+      <div class=row>
+        <div>
+          <label for=field-nom>Nom</label>
+          <input id=field-nom name=nom>
+        </div>
+        <div>
+          <label for=field-prenom>Prénom</label>
+          <input id=field-prenom name=prenom>
+        </div>
+      </div>
+    </fieldset>
 
-  <p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
+    <fieldset>
+      <div>
+        <label for=field-tel>Téléphone professionel (10 chiffres)</label>
+        <input id=field-tel name=tel>
+      </div>
+    </fieldset>
 
-  <nav>
-    <a class=button>Suivant</a>
-  </nav>
+    <fieldset>
+      <p>Adresse de l'entreprise déclarante ou siège de l'UES</p>
+      <div class=row>
+        <div>
+          <select name=region>
+            <option value="">Région</option>
+          </select>
+        </div>
+        <div>
+          <select name=departement>
+            <option value="">Département</option>
+          </select>
+        </div>
+      </div>
+
+      <div class=row>
+        <div>
+          <label for="field-adresse">Adresse</label>
+          <input id=field-adresse name=adresse>
+        </div>
+      </div>
+
+      <div class=row>
+        <div>
+          <label for="field-codepostal">Code postal (5 car.)</label>
+          <input id=field-codepostal name=codepostal>
+        </div>
+        <div>
+          <label for="field-commune">Commune</label>
+          <input id=field-commune name=commune>
+        </div>
+      </div>
+    </fieldset>
+  </form>
 </template>
+
+<template name=404>
+  <h1>La page n'existe pas</h1>
+  <p>Vous êtes arrivé sur cette page par erreur. <a href="/">Retourner à l'accueil</a></p>
+</template>
+
 
 <script src="https://unpkg.com/page/page.js"></script>
 <script>
   const main = document.querySelector('main')
+  const progress = document.querySelector('progress')
+  const previousButton = document.querySelector('a[previous]')
+  const nextButton = document.querySelector('a[next]')
+  const template404 = document.querySelector('template[name="404"]')
+
+  const steps = [
+    '', 'declarant', 'annee'
+  ]
+
+  progress.max = steps.length - 1
 
   page('/', function (req) {
-    const template = document.querySelector(`[name=intro]`)
-    main.innerHTML = template.innerHTML
+    changePage('')
   })
 
   page('/:name', function (req) {
-    const name = req.params.name
-    const template = document.querySelector(`[name=${name}]`)
-    main.innerHTML = template.innerHTML
+    changePage(req.params.name)
   })
 
   page({ hashbang: true })
+
+
+  function changePage(name) {
+    loadTemplate(name || 'intro')
+
+    const step = steps.indexOf(name)
+    progress.value = step
+    previousButton.onclick = function() {page.redirect(`/${steps[step - 1]}`)}
+    nextButton.onclick = function() {page.redirect(`/${steps[step + 1]}`)}
+    step <= 0 ? previousButton.setAttribute('disabled', 'disabled') : previousButton.removeAttribute('disabled')
+  }
+
+  function loadTemplate(name) {
+    const template = document.querySelector(`[name=${name}]`)
+    try {
+      main.innerHTML = template.innerHTML
+    }
+    catch {
+      main.innerHTML = template404.innerHTML
+    }
+  }
 </script>
 
 <style>
@@ -74,7 +160,7 @@
   }
 
   template {
-    /* display: none; */
+    display: none;
   }
 
   header {
@@ -101,8 +187,27 @@
     text-align: center;
   }
 
-  main nav {
+  nav {
     margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  progress {
+    flex: 1;
+  }
+
+  fieldset {
+    display: block;
+    border: 1px solid #FF0080;
+    padding: .5rem;
+  }
+  fieldset:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    margin-right: 2rem;
   }
 
   .warning {
@@ -119,6 +224,30 @@
     padding: .5rem 3rem;
     border-radius: .5rem;
   }
+  a.button[disabled] {
+    background-color: #bbb;
+    box-shadow: none;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  .row > * {
+    flex: 1;
+  }
+  .row:not(last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    max-width: 50%;
+  }
+
+  input,
+  select {
+    width: 50%;
+  }
 
   @media screen and (min-width: 600px) {
     body {
@@ -127,7 +256,6 @@
 
     header {
       display: flex;
-      flex: 1 2;
     }
 
     header hgroup {
