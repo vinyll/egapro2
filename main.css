@@ -1,0 +1,124 @@
+html {
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 740px;
+  padding: 2rem;
+  margin-top: 1rem;
+  border-radius: .3rem;
+  background-color: #EDEDED;
+  font-size: 15px;
+}
+
+template {
+  display: none;
+}
+
+header {
+  text-align: center;
+}
+header hgroup {
+  padding: .5rem 3rem;
+}
+
+hgroup h1,
+hgroup h2 {
+  padding: .2rem 0;
+  margin: 0;
+}
+hgroup,
+main h1 {
+  background-color: #FF0080;
+  color: white;
+}
+
+main h1 {
+  font-size: 1.3rem;
+  padding: 1rem;
+  text-align: center;
+}
+h3, h4 {
+  margin: 0;
+}
+
+nav {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+progress {
+  flex: 1;
+}
+
+fieldset {
+  display: block;
+  border: 1px solid #FF0080;
+  padding: .5rem;
+}
+fieldset:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-right: 2rem;
+}
+
+.warning {
+  color: #c00;
+}
+
+a.button {
+  text-decoration: none;
+  color: #fff;
+  background-color: #FF0080;
+  font-weight: bold;
+  font-size: 1.3rem;
+  box-shadow: 0 5px 5px #999;
+  padding: .5rem 3rem;
+  border-radius: .5rem;
+}
+a.button[disabled] {
+  background-color: #bbb;
+  box-shadow: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.row > * {
+  flex: 1;
+}
+.row:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+label {
+  max-width: 50%;
+}
+
+input:not([type=radio]),
+select {
+  width: 50%;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    margin: 1rem auto;
+  }
+
+  header {
+    display: flex;
+  }
+
+  header hgroup {
+    flex: auto;
+    margin-left: 1rem;
+  }
+}
