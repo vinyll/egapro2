@@ -42,4 +42,9 @@ function loadTemplate(name) {
   catch {
     main.innerHTML = template404.innerHTML
   }
+  setPageTitle(main.querySelector('h1').innerHTML)
+}
+
+function setPageTitle(title) {
+  document.title = `Egapro – ${title}`
 }
