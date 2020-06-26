@@ -90,6 +90,65 @@
   </form>
 </template>
 
+<template name=annee>
+  <h1>Année et périmètre retenus pour le calcul
+    et la publication des indicateurs</h1>
+
+  <fieldset>
+    <div class=row>
+      <label for=field-annee>Année au titre de laquelle vous transmettez vos indicateurs</label>
+      <input name=annee value=2019 disabled>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class=row>
+      <h4>Vous êtes une</h4>
+      <label><input type=radio name=statut value="entreprise"> Entreprise</label>
+      <label><input type=radio name=statut value="ues"> Unité Économique et Sociale (UES)</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class=row>
+      <h4>Tranches d'effectifs</h4>
+      <label><input type=radio name=effectifs value="50"> De 50 à 100 inclus</label>
+      <label><input type=radio name=effectifs value="250"> De 251 à 999 inclus</label>
+      <label><input type=radio name=effectifs value="1000"> 1000 ou plus</label>
+    </div>
+  </fieldset>
+
+  <h1>Période de référence considérée pour le calcul des indicateurs</h1>
+
+  <fieldset>
+    <div class=row>
+      <h4>Période de référence</h4>
+      <label><input type=radio name=periode value="civile"> Année civile</label>
+      <label><input type=radio name=periode value="autre"> Autre période de référence</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="row">
+      <label for="field-reference-date">Date de début de la période de référence</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class=row>
+      <label for="field-date">Date de début de la période de référence</label>
+      <input id="field-date" type=date name=date>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class=row>
+      <label for="field-salaries">Nombre de salariés pris en compte pour le calcul des indicateurs sur la période de référence</label>
+      <input id="field-salaries" type=number name=salaries min=0>
+    </div>
+  </fieldset>
+</template>
+
 <template name=404>
   <h1>La page n'existe pas</h1>
   <p>Vous êtes arrivé sur cette page par erreur. <a href="/">Retourner à l'accueil</a></p>
@@ -186,6 +245,9 @@
     padding: 1rem;
     text-align: center;
   }
+  h3, h4 {
+    margin: 0;
+  }
 
   nav {
     margin-top: 3rem;
@@ -232,11 +294,12 @@
   .row {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
   .row > * {
     flex: 1;
   }
-  .row:not(last-of-type) {
+  .row:not(:last-child) {
     margin-bottom: 1rem;
   }
 
@@ -244,7 +307,7 @@
     max-width: 50%;
   }
 
-  input,
+  input:not([type=radio]),
   select {
     width: 50%;
   }
