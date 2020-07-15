@@ -8,6 +8,34 @@ const steps = [
   '', 'declarant', 'annee'
 ]
 
+const components = {
+  group: function(children) {
+    if(!Array.isArray(children)) children = [children]
+    return `<div>${children.join('')}</div>`
+  },
+
+  label: function({ name, label }) {
+    return `<label for="field--${name}">${label}</label>`
+  },
+
+  input: function({ type, name, label, required, value }) {
+    return `
+      ${ this.label({ name, label }) }
+      <input id="field--${name}" value="${value || ''}" type="${type || 'text'}" name="${name}" placeholder="${label}" ${required ? 'required' : ''}>
+    `
+  },
+
+  select: function({ name, label, required, options, value }) {
+    return `
+      ${ this.label({ name, label }) }
+      <select id="field--${name}" name="${name}" ${required ? 'required' : ''}>
+        ${options.map((option) => `<option value="${option.value}" ${value == option.value ? 'selected' : ''}>${option.label}</option>`).join('\n')}
+      </select>
+    `
+  }
+}
+const c = components // shorthand alias
+
 progress.max = steps.length - 1
 
 page('/', function (req) {
@@ -29,7 +57,9 @@ function changePage(name) {
 
   // "Previous" button
   if (step > 0) {
-    previousButton.onclick = function() {page.redirect(`/${steps[step - 1]}`)}
+    previousButton.onclick = function() {
+      page.redirect(`/${steps[step - 1]}`)
+    }
     previousButton.removeAttribute('disabled')
   } else {
     previousButton.setAttribute('disabled', 'disabled')
@@ -38,6 +68,7 @@ function changePage(name) {
   if(step < steps.length - 1) {
     document.forms[0].onsubmit = function(event) {
       event.preventDefault()
+      if(validateForm && !validateForm()) return
       page.redirect(`/${steps[step + 1]}`)
     }
     nextButton.removeAttribute('disabled')
@@ -49,7 +80,8 @@ function changePage(name) {
 
 function loadTemplate(name) {
   const template = document.querySelector(`[name=${name}]`)
-  main.innerHTML = template ? template.innerHTML : template404.innerHTML
+  const content = template ? template.innerHTML : template404.innerHTML
+  main.innerHTML = (new Function('return `'+content+'`'))()
   setPageTitle(main.querySelector('h1').innerHTML)
   const script = main.querySelector('script')
   if(script) eval(script.innerText)
