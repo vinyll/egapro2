@@ -37,74 +37,87 @@
 
   <p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
 
-  ${c.select({ name: 'annee', label: 'Année de déclaration', required: true, options: [{ value: 2019, label: "2019" }, { value: 2020, label: "2020" }] })}
-  ${c.input({ type: 'email', name: 'email', label: 'Adresse email de déclaration', required: true })}
+  <div>
+    ${c.input({ type: 'email', name: 'email', label: 'Adresse email de déclaration', required: true, value: 'test@example.org' })}
+  </div>
 
   <script>
-    window.validateForm = function() {
-      return confirm("Vous êtes sur que votre fofmulaire est valide ? continuez…")
+    window.validateForm = async function(form) {
+      const response = await request('post', '/token', {
+        email: form.elements.email.value
+      })
+      if(response.ok) return true
     }
   </script>
+</template>
+
+
+<template name=validation-email>
+  <h1>Validation de l'adresse de messagerie</h1>
+
+  <p>Vous allez recevoir un mail à l'adresse que vous avez indiquée à l'étape précédente.</p>
+
+  <p>Ouvrez ce mail et cliquez sur le lien de validation afin de poursuivre votre inscription</p>
+
+  <p>Si vous ne recevez pas ce mail sous peu, il se peut que l'adresse de messagerie saisie soit incorrecte, ou bien que le mail ait été déplacé dans votre dossier de courriers indésirables ou dans le dossier SPAM.</p>
+
+  <p>En cas d'échec, la procédure devra être reprise avec une autre adresse de messagerie.</p>
+
+  <script>
+    debugger
+    document.querySelector('button[next]').disabled = !localStorage.token
+    window.validateForm = async function(form) {
+      if(c) return true
+    }
+  </script>
+</template>
+
+<template name="commencer">
+  <h1>Commencer la déclaration</h1>
+  <div>
+    ${c.select({ name: 'annee', label: 'Année de déclaration', required: true, options: [{ value: 2019, label: "2019" }, { value: 2020, label: "2020" }] })}
+  </div>
+  <div>
+    ${c.input({ type: 'regex', name: 'siren', label: 'Numéro SIREN', required: true, pattern: '[0-9]{9}', placeholder: '9 chiffres', value: '123456789' })}
+  </div>
+
 </template>
 
 
 <template name=declarant>
   <h1>Identification du déclarant pour tout contact ultérieur</h1>
 
-  <form>
-    <fieldset>
-      <!-- fieldset display flex can't work in Chromium -->
-      <div class=row>
-        ${
-          c.group([
-            c.input({ name: 'nom', label: 'Nom', required: true }),
-            c.input({ name: 'prenom', label: 'Prénom', required: true }),
-          ])
-        }
-      </div>
-    </fieldset>
+  <fieldset>
+    <!-- fieldset display flex can't work in Chromium -->
+    <div class=row>
+      ${c.group(c.input({ name: 'nom', label: 'Nom', required: true }))}
+      ${c.group(c.input({ name: 'prenom', label: 'Prénom', required: true }))}
+    </div>
+  </fieldset>
 
-    <fieldset>
+  <fieldset>
+    ${c.input({ name: 'tel', label: 'Téléphone professionel (10 chiffres)' })}
+  </fieldset>
+
+  <fieldset>
+    <p>Adresse de l'entreprise déclarante ou siège de l'UES</p>
+    <div class=row>
+      ${c.group(c.select({ name: 'region', label: 'Région', options: [] }))}
+      ${c.group(c.select({ name: 'departement', label: 'Département', options: [] }))}
+    </div>
+
+    <div class=row>
+      ${c.group(c.input({ name: 'adresse', label: 'Adresse' }))}
+    </div>
+
+    <div class=row>
+      ${c.group(c.input({ name: 'code-postal', label: 'Code postal (5 car.)', regex: '\d[\dab]\d{3}' }))}
       <div>
-        <label for=field-tel>Téléphone professionel (10 chiffres)</label>
-        <input id=field-tel name=tel>
+        <label for="field-commune">Commune</label>
+        <input id=field-commune name=commune>
       </div>
-    </fieldset>
-
-    <fieldset>
-      <p>Adresse de l'entreprise déclarante ou siège de l'UES</p>
-      <div class=row>
-        <div>
-          <select name=region>
-            <option value="">Région</option>
-          </select>
-        </div>
-        <div>
-          <select name=departement>
-            <option value="">Département</option>
-          </select>
-        </div>
-      </div>
-
-      <div class=row>
-        <div>
-          <label for="field-adresse">Adresse</label>
-          <input id=field-adresse name=adresse>
-        </div>
-      </div>
-
-      <div class=row>
-        <div>
-          <label for="field-codepostal">Code postal (5 car.)</label>
-          <input id=field-codepostal name=codepostal>
-        </div>
-        <div>
-          <label for="field-commune">Commune</label>
-          <input id=field-commune name=commune>
-        </div>
-      </div>
-    </fieldset>
-  </form>
+    </div>
+  </fieldset>
 </template>
 
 <template name=annee>

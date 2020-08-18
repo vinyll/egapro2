@@ -5,7 +5,7 @@ const nextButton = document.querySelector('button[next]')
 const template404 = document.querySelector('template[name="404"]')
 
 const steps = [
-  '', 'declarant', 'annee'
+  '', 'validation-email', 'commencer', 'declarant', 'annee'
 ]
 
 const components = {
@@ -18,10 +18,10 @@ const components = {
     return `<label for="field--${name}">${label}</label>`
   },
 
-  input: function({ type, name, label, required, value }) {
+  input: function({ type, name, label, required, value, placeholder, pattern }) {
     return `
       ${ this.label({ name, label }) }
-      <input id="field--${name}" value="${value || ''}" type="${type || 'text'}" name="${name}" placeholder="${label}" ${required ? 'required' : ''}>
+      <input id="field--${name}" value="${value || ''}" type="${type || 'text'}" name="${name}" placeholder="${placeholder || label}" ${required ? 'required' : ''} pattern="${pattern || '.*'}">
     `
   },
 
@@ -40,6 +40,11 @@ progress.max = steps.length - 1
 
 page('/', function (req) {
   changePage('')
+})
+
+page('/login/:token', function (req) {
+  localStorage.setItem('token', req.params.token)
+  page.redirect('/')
 })
 
 page('/:name', function (req) {
@@ -66,12 +71,14 @@ function changePage(name) {
   }
   // "Next" button
   if(step < steps.length - 1) {
-    document.forms[0].onsubmit = function(event) {
+    nextButton.removeAttribute('disabled')
+    document.forms[0].onsubmit = async function(event) {
       event.preventDefault()
-      if(validateForm && !validateForm()) return
+      if(typeof validateForm === 'function')
+        if (!(await validateForm(event.target))) return
+      else validateForm = undefined // reset function
       page.redirect(`/${steps[step + 1]}`)
     }
-    nextButton.removeAttribute('disabled')
   }
   else {
     nextButton.setAttribute('disabled', 'disabled')
@@ -79,14 +86,34 @@ function changePage(name) {
 }
 
 function loadTemplate(name) {
+  const dummy = document.createElement('div')
   const template = document.querySelector(`[name=${name}]`)
-  const content = template ? template.innerHTML : template404.innerHTML
-  main.innerHTML = (new Function('return `'+content+'`'))()
-  setPageTitle(main.querySelector('h1').innerHTML)
-  const script = main.querySelector('script')
-  if(script) eval(script.innerText)
+  dummy.innerHTML = template ? template.innerHTML : template404.innerHTML
+  setPageTitle(dummy.querySelector('h1').innerHTML)
+  const script = dummy.querySelector('script')
+  if(script) {
+    eval(script.innerText)
+    dummy.removeChild(script)
+  }
+  main.innerHTML = (new Function('return `'+dummy.innerHTML+'`'))()
 }
 
 function setPageTitle(title) {
   document.title = `Egapro – ${title}`
+}
+
+async function request(method, uri, body, options = {}) {
+  if(!['get', 'head'].includes(method.toLowerCase()))
+    options.body = body ? JSON.stringify(body) : ""
+  options.method = method
+  options.headers = { 'API-KEY': localStorage.token }
+  const response = await fetch(`http://localhost:2626${uri}`, options)
+  try {
+    response.data = await response.json()
+  }
+  catch {
+    response.data = null
+  }
+  if(!response.ok && response.data) alert(response.data.error)
+  return response
 }
