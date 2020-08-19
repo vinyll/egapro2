@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-  </head>
-  <body>
-    {{ content}}
-  </body>
+<html lang="fr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>{{ page.title }} - {{ site.title }}</title>
+<link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+
+<form id="page-form" action="{{ page.url }}">
+  <header>
+    <img src="/assets/img/marianne.jpg" alt="Marianne">
+    <hgroup>
+      <h1>Égalité professionnelle</h1>
+      <h2>Index 2020 au titre de l'année 2019</h2>
+    </hgroup>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <nav>
+    <a class=button href="/" previous>Précédent</a>
+    <progress max=0 value=0></progress>
+    <button next>Suivant</button>
+  </nav>
+</form>
+</body>
+<script src="/assets/js/main.js"></script>
+
 </html>

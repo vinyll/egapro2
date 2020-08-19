@@ -1,0 +1,12 @@
+{% include label.html label=include.label name=include.name %}
+<input
+  id="field--{{ include.name }}"
+  value="{{ include.value || '' }}"
+  type="{{ include.type || 'text' }}"
+  name="{{ include.name }}"
+  placeholder="{{ include.placeholder || include.label }}"
+  {% if pattern %}
+  pattern="{{ include.pattern || '.*' }}"
+  {% endif %}
+  {{ include.required ? 'required' : '' }}
+/>
