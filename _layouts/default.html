@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <title>{{ page.title }} - {{ site.title }}</title>
-<link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+<link rel="stylesheet" href="/assets/css/main.css">
+<script src="/assets/js/utils.js"></script>
 
 <form id="page-form" action="{{ page.url }}">
   <header>
@@ -14,17 +15,9 @@
     </hgroup>
   </header>
 
-  <main>
-    {{ content }}
-  </main>
-
-  <nav>
-    <a class=button href="/" previous>Précédent</a>
-    <progress max=0 value=0></progress>
-    <button next>Suivant</button>
-  </nav>
+  {{ content }}
 </form>
-</body>
-<script src="/assets/js/main.js"></script>
 
+<!-- tunnel.js uses DOM and should be loaded last -->
+<script src="/assets/js/tunnel.js"></script>
 </html>

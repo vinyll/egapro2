@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: intro
 title: "Validation de l'adresse de messagerie"
 ---
 <h1>{{ page.title }}</h1>
@@ -12,9 +12,15 @@ title: "Validation de l'adresse de messagerie"
 
 <p>En cas d'échec, la procédure devra être reprise avec une autre adresse de messagerie.</p>
 
+<nav>
+  <a class=button href="/" previous>Modifier l'adresse e-mail</a>
+</nav>
+
 <script>
-  document.querySelector('button[next]').disabled = !localStorage.token
-  window.validateForm = async function(form) {
-    if(localStorage.token) return true
-  }
+  document.body.addEventListener('load', () => {
+    document.querySelector('button[next]').disabled = !localStorage.token
+    window.validateForm = async function(form) {
+      if(localStorage.token) return true
+    }
+  })
 </script>

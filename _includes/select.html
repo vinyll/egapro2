@@ -1,16 +1,15 @@
 {% include label.html label=include.label name=include.name %}
 <select
-  id="field--${name}"
-  name="${name}"
+  id="field--{{include.name}}"
+  name="{{include.name}}"
   {% if include.required %}required{% endif %}
-  ${required ? 'required' : ''}
 >
   {% for option in include.options %}
     <option
-      value="{{option.value}}"
+      value="{{include.option.value}}"
       {% if include.value == option.value %}selected{% endif %}
     >
-      ${option.label}
+      {{include.option.label}}
     </option>
   {% endfor %}
 </select>

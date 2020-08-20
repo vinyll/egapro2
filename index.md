@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: intro
 title: "A propos de la transmission des indicateurs et du niveau de résultat"
 ---
 <h1>{{ page.title }}</h1>
@@ -11,3 +11,24 @@ title: "A propos de la transmission des indicateurs et du niveau de résultat"
 <div>
   {% include input.html type='email' name='email' label='Adresse email de déclaration' required=true value='test@example.org' %}
 </div>
+
+<nav>
+  <button next>Recevoir le lien de déclaration</button>
+</nav>
+
+<script>
+  const tokenParam = '?token='
+  if(location.search.startsWith(tokenParam)) {
+    localStorage.token = location.search.slice(tokenParam.length)
+    redirect('/declaration')
+  }
+
+  document.getElementById('page-form').addEventListener('submit', async (event) => {
+    event.preventDefault()
+    const form = event.target
+    const response = await request('post', '/token', {
+      email: form.elements.email.value
+    })
+    if(response.ok) redirect('/validation-email')
+  })
+</script>
