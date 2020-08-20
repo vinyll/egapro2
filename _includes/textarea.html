@@ -1,0 +1,7 @@
+{% include label.html label=include.label name=include.name %}
+<textarea
+  id="field--{{ include.name }}"
+  name="{{ include.name }}"
+  placeholder="{{ include.placeholder || include.label }}"
+  {{ include.required ? 'required' : '' }}
+>{{ include.value || '' }}</textarea>

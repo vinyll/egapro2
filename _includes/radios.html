@@ -1,0 +1,14 @@
+{% include label.html label=include.label name=include.name %}
+<div
+  id="field--{{ include.name }}"
+  {% if include.block == 'true' %}option-block{% endif %}
+  >
+  {% for option in include.options %}
+    <option
+      value="{{option.value}}" name="{{ include.name }}"
+      {% if include.value == option.value %}checked{% endif %}
+    >
+      {{option.label}}
+    </option>
+  {% endfor %}
+</div>

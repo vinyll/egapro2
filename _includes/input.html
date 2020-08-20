@@ -8,5 +8,7 @@
   {% if pattern %}
   pattern="{{ include.pattern || '.*' }}"
   {% endif %}
+  {% if include.min %}min={{ include.min }}{% endif %}
+  {% if include.max %}max={{ include.max }}{% endif %}
   {{ include.required ? 'required' : '' }}
 />

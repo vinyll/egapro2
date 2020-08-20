@@ -27,3 +27,19 @@ function buildSelectOptions(select, list, value) {
     select.appendChild(option)
   })
 }
+
+function buildRadioOptions(optgroup, list, value) {
+  optgroup.innerHTML = list.map((val, i) => {
+    const content = `<label for="radio--${optgroup.name}--${i}">
+    <input type="radio" value="${val.value}" ${val.value == value ? 'checked' : ''}>
+    ${val.label}
+    </label>`
+    const wrapped = optgroup.hasAttribute('option-block') ? `<div>${content}</div>` : content
+    return wrapped
+  }).join('')
+}
+
+// Shortcut event
+window.addEventListener('DOMContentLoaded', () => {
+  document.onready && document.onready()
+})
