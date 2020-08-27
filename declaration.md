@@ -11,7 +11,7 @@ title: "Commencer la déclaration"
   </div>
 
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
+  document.onready = function() {
     const year = (new Date()).getFullYear()
     buildSelectOptions(
       document.querySelector('[name=annee]'),
@@ -23,5 +23,12 @@ title: "Commencer la déclaration"
     window.validateForm = async function(form) {
       if(localStorage.token) return true
     }
-  })
+  }
+
+  document.onsubmit = async function(form) {
+    localStorage.annee = form.annee.value
+    localStorage.siren = form.siren.value
+    const response = await request('PUT', `/declaration/${localStorage.siren}/${localStorage.annee}`, {})
+    return response.ok
+  }
 </script>

@@ -1,0 +1,22 @@
+[
+  {"value": 457, "name": "Auvergne-Rhône-Alpes"},
+  {"value": 458, "name": "Hauts-de-France"},
+  {"value": 459, "name": "Provence-Alpes-Côte d'Azur"},
+  {"value": 460, "name": "Grand Est"},
+  {"value": 461, "name": "Occitanie"},
+  {"value": 462, "name": "Normandie"},
+  {"value": 463, "name": "Nouvelle-Aquitaine"},
+  {"value": 464, "name": "Centre-Val de Loire"},
+  {"value": 465, "name": "Bourgogne-Franche-Comté"},
+  {"value": 466, "name": "Bretagne"},
+  {"value": 467, "name": "Corse"},
+  {"value": 468, "name": "Pays de la Loire"},
+  {"value": 469, "name": "Ile-de-France"},
+  {"value": 470, "name": "Guadeloupe"},
+  {"value": 471, "name": "Martinique"},
+  {"value": 472, "name": "Guyane"},
+  {"value": 473, "name": "La Réunion"},
+  {"value": 474, "name": "Mayotte"},
+  {"value": 475, "name": "Région polynésienne"},
+  {"value": 476, "name": "Région Sud Pacifique"}
+]

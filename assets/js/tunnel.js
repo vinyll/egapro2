@@ -13,8 +13,8 @@ progress.value = step
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
-  if(typeof validateForm === 'function') {
-    if (!(await validateForm(event.target))) return
+  if(typeof document.onsubmit === 'function') {
+    if (!(await document.onsubmit(event.target))) return
   }
   redirect(`/${steps[step + 1]}`)
 })
@@ -28,15 +28,6 @@ else {
 }
 
 // "Next" button
-if(step < steps.length - 1) {
-  document.forms[0].onsubmit = async function(event) {
-    event.preventDefault()
-    if(typeof validateForm === 'function')
-      if (!(await validateForm(event.target))) return
-    else validateForm = undefined // reset function
-    page.redirect(`/${steps[step + 1]}`)
-  }
-}
-else {
+if(step >= steps.length - 1) {
   nextButton.setAttribute('disabled', 'disabled')
 }

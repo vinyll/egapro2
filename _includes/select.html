@@ -1,15 +1,27 @@
-{% include label.html label=include.label name=include.name %}
+{% include label.html label=include.label name=include.name required=include.required %}
 <select
   id="field--{{include.name}}"
   name="{{include.name}}"
   {% if include.required %}required{% endif %}
 >
-  {% for option in include.options %}
-    <option
-      value="{{include.option.value}}"
-      {% if include.value == option.value %}selected{% endif %}
-    >
-      {{include.option.label}}
-    </option>
-  {% endfor %}
+  {% if include.empty %}
+  {% else %}
+  <option value=""> --- </option>
+  {% endif %}
 </select>
+
+{% if include.dataset %}
+<script>
+  fetch('/datasets/{{ include.dataset }}.json')
+  .then(function(r){ return r.json() })
+  .then(function(data) {
+    var select = document.getElementById('field--{{include.name}}')
+    for(var k in data) {
+      var option = document.createElement('option')
+      option.value = data[k].value
+      option.textContent = data[k].name
+      select.appendChild(option)
+    }
+  })
+</script>
+{% endif %}

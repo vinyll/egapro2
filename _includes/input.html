@@ -1,4 +1,4 @@
-{% include label.html label=include.label name=include.name %}
+{% include label.html label=include.label name=include.name required=include.required %}
 <input
   id="field--{{ include.name }}"
   value="{{ include.value || '' }}"
@@ -10,5 +10,5 @@
   {% endif %}
   {% if include.min %}min={{ include.min }}{% endif %}
   {% if include.max %}max={{ include.max }}{% endif %}
-  {{ include.required ? 'required' : '' }}
+  {% if include.required %}required{% endif %}
 />
