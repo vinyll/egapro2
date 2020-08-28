@@ -8,14 +8,30 @@ const steps = [
 const pageName = location.pathname.slice(1)
 const step = steps.indexOf(pageName)
 
+window.data = JSON.parse(localStorage.data)
+
+loadFormValues(form, data)
+
 progress.max = steps.length - 1
 progress.value = step
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
-  if(typeof document.onsubmit === 'function') {
-    if (!(await document.onsubmit(event.target))) return
+  const form = event.target
+  const data = formToData(form)
+
+  if(typeof document.onsend === 'function') {
+    try {
+      await document.onsend(data)
+    } catch(e) {
+      alert(e)
+      return
+    }
   }
+
+  const response = await sendData(data)
+  if(!response.ok) return
+
   redirect(`/${steps[step + 1]}`)
 })
 
@@ -30,4 +46,25 @@ else {
 // "Next" button
 if(step >= steps.length - 1) {
   nextButton.setAttribute('disabled', 'disabled')
+}
+
+function formToData(form) {
+  const data = Array.from(form.elements).reduce((data, node) => {
+    if(node.name) data[node.name] = node.value
+    return data
+  }, {})
+  return data
+}
+
+async function sendData(data) {
+  const response = await request('PUT', `/declaration/${localStorage.siren}/${localStorage.annee}`, data)
+  if(response.ok) localStorage.data = JSON.stringify(Object.assign(window.data, data))
+  return response
+}
+
+function loadFormValues(form, data) {
+  Object.keys(data).forEach((prop) => {
+    const node = form.elements[prop]
+    if(node) node.value = data[prop]
+  })
 }
