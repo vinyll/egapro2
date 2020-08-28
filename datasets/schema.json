@@ -1,0 +1,184 @@
+{
+  "id": "",
+  "data": {
+    "informations": {
+      "formValidated": false,
+      "nomEntreprise": "",
+      "trancheEffectifs": "50 à 250",
+      "debutPeriodeReference": "",
+      "finPeriodeReference": ""
+    },
+    "effectif": {
+      "formValidated": false,
+      "nombreSalaries": [{
+        "categorieSocioPro": 0,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 1,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 2,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 3,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }]
+    },
+    "indicateurUn": {
+      "formValidated": false,
+      "csp": true,
+      "coef": false,
+      "autre": false,
+      "remunerationAnnuelle": [{
+        "categorieSocioPro": 0,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 1,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 2,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }, {
+        "categorieSocioPro": 3,
+        "tranchesAges": [{
+          "trancheAge": 0
+        }, {
+          "trancheAge": 1
+        }, {
+          "trancheAge": 2
+        }, {
+          "trancheAge": 3
+        }]
+      }],
+      "coefficientGroupFormValidated": false,
+      "coefficientEffectifFormValidated": false,
+      "coefficient": []
+    },
+    "indicateurDeux": {
+      "formValidated": false,
+      "presenceAugmentation": true,
+      "tauxAugmentation": [{
+        "categorieSocioPro": 0
+      }, {
+        "categorieSocioPro": 1
+      }, {
+        "categorieSocioPro": 2
+      }, {
+        "categorieSocioPro": 3
+      }]
+    },
+    "indicateurTrois": {
+      "formValidated": false,
+      "presencePromotion": true,
+      "tauxPromotion": [{
+        "categorieSocioPro": 0
+      }, {
+        "categorieSocioPro": 1
+      }, {
+        "categorieSocioPro": 2
+      }, {
+        "categorieSocioPro": 3
+      }]
+    },
+    "indicateurDeuxTrois": {
+      "formValidated": false,
+      "presenceAugmentationPromotion": null,
+      "periodeDeclaration": "unePeriodeReference"
+    },
+    "indicateurQuatre": {
+      "formValidated": false,
+      "presenceCongeMat": true
+    },
+    "indicateurCinq": {
+      "formValidated": false
+    },
+    "informationsEntreprise": {
+      "formValidated": false,
+      "nomEntreprise": "",
+      "siren": "",
+      "codeNaf": "",
+      "region": "",
+      "departement": "",
+      "adresse": "",
+      "codePostal": "",
+      "commune": "",
+      "structure": "Entreprise",
+      "nomUES": "",
+      "entreprisesUES": []
+    },
+    "informationsDeclarant": {
+      "formValidated": false,
+      "nom": "",
+      "prenom": "",
+      "tel": "",
+      "email": "",
+      "acceptationCGU": false
+    },
+    "declaration": {
+      "formValidated": false,
+      "mesuresCorrection": "",
+      "dateConsultationCSE": "",
+      "datePublication": "",
+      "lienPublication": "",
+      "dateDeclaration": "",
+      "totalPoint": 0,
+      "totalPointCalculable": 0
+    }
+  }
+}
