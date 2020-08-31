@@ -8,7 +8,7 @@ const steps = [
 const pageName = location.pathname.slice(1)
 const step = steps.indexOf(pageName)
 
-window.data = JSON.parse(localStorage.data)
+window.data = JSON.parse(localStorage.data || '{}')
 
 loadFormValues(form, data)
 
