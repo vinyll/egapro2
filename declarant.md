@@ -38,10 +38,10 @@ title: "Identification du déclarant pour tout contact ultérieur"
     document.getElementById('field--entreprise.region').addEventListener('change', (event) => {
       const value = event.target.value
       console.debug(`region ${value} was selected.`)
+      const dptSelect = document.getElementById('field--entreprise.departement')
+      const dptList = event.target.selectedOptions[0].selectedData
+        .map(dptName => ({value: dptName, label: dptName}))
+      buildSelectOptions(dptSelect, dptList, '')
     })
-
-    document.getElementById('field--entreprise.departement').innerHTML = `
-      <option value=1>default</option>
-    `
   }
 </script>

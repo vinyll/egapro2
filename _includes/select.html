@@ -20,6 +20,9 @@
       var option = document.createElement('option')
       option.value = data[k].value
       option.textContent = data[k].name
+      option.value = k
+      option.textContent = k
+      option.selectedData = data[k]
       select.appendChild(option)
     }
   })
