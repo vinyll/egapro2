@@ -32,7 +32,7 @@ function buildRadioOptions(optgroup, list, value) {
   const name = optgroup.getAttribute('name')
   optgroup.innerHTML = list.map((val) => {
     const content = `<label>
-    <input type="radio" id="field--${name}" name="name" value="${val.value}" ${val.value == value ? 'checked' : ''}>
+    <input type="radio" id="field--${name}" name="${name}" value="${val.value}" ${val.value == value ? 'checked' : ''}>
     ${val.label}
     </label>`
     const wrapped = optgroup.hasAttribute('option-block') ? `<div>${content}</div>` : content
