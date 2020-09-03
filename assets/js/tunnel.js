@@ -65,10 +65,11 @@ if(step >= steps.length - 1) {
 }
 
 function formToData(form) {
-  const data = Array.from(form.elements).reduce((data, node) => {
-    if(node.name) data[node.name] = node.value
-    return data
-  }, {})
+  const formData = new FormData(form)
+  var data = {};
+  formData.forEach(function(value, key){
+      data[key] = value;
+  });
   return data
 }
 
