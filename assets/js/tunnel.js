@@ -12,7 +12,7 @@ const steps = [
       return 'remunerationCoef'
     } else if (data.calcul === "autre") {
       return 'remunerationAutre'
-    } else if (data.calcul = "csp") {
+    } else if (data.calcul === "csp") {
       return 'remunerationCsp'
     } else {
       return 'augmentation'
@@ -22,7 +22,7 @@ const steps = [
 ]
 
 const pageName = location.pathname.slice(1)
-const step = steps.findIndex(step => step.name.startsWith( pageName))
+const step = steps.findIndex(step => pageName.startsWith(step.name))
 
 window.data = JSON.parse(localStorage.data || '{}')
 
@@ -48,7 +48,11 @@ form.addEventListener('submit', async (event) => {
   const response = await sendData(data)
   if(!response.ok) return
 
-  redirect(`/${steps[step + 1].name}`)
+  const nextStep = steps[step].nextStep
+  if (nextStep) {
+    return redirect(`/${nextStep(data)}`)
+  }
+  return redirect(`/${steps[step + 1].name}`)
 })
 
 // "Previous" button
