@@ -57,7 +57,10 @@ form.addEventListener('submit', async (event) => {
 
 // "Previous" button
 if (step > 0) {
-  previousButton.href = `/${steps[step - 1].name}`
+  previousButton.onclick = (e) => {
+    e.preventDefault()
+    history.back()
+  }
 }
 else {
   previousButton.setAttribute('disabled', 'disabled')
@@ -70,10 +73,10 @@ if(step >= steps.length - 1) {
 
 function formToData(form) {
   const formData = new FormData(form)
-  var data = {};
-  formData.forEach(function(value, key){
-      data[key] = value;
-  });
+  var data = {}
+  formData.forEach((value, key) => {
+      data[key] = value
+  })
   return data
 }
 
