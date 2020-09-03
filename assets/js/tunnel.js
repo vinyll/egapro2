@@ -3,10 +3,26 @@ const progress = document.querySelector('progress')
 const previousButton = document.querySelector('a[previous]')
 const nextButton = document.querySelector('button[next]')
 const steps = [
-  'declaration', 'declarant', 'annee', 'entreprise', 'remuneration'
+   {name: 'declaration'},
+   {name: 'declarant'},
+   {name: 'annee'},
+   {name: 'entreprise'},
+   {name: 'remuneration', nextStep: data => {
+    if (data.calcul === "coef") {
+      return 'remunerationCoef'
+    } else if (data.calcul === "autre") {
+      return 'remunerationAutre'
+    } else if (data.calcul = "csp") {
+      return 'remunerationCsp'
+    } else {
+      return 'augmentation'
+    }
+  }},
+  {name: 'augmentation'}
 ]
+
 const pageName = location.pathname.slice(1)
-const step = steps.indexOf(pageName)
+const step = steps.findIndex(step => step.name.startsWith( pageName))
 
 window.data = JSON.parse(localStorage.data || '{}')
 
@@ -32,12 +48,12 @@ form.addEventListener('submit', async (event) => {
   const response = await sendData(data)
   if(!response.ok) return
 
-  redirect(`/${steps[step + 1]}`)
+  redirect(`/${steps[step + 1].name}`)
 })
 
 // "Previous" button
 if (step > 0) {
-  previousButton.href = `/${steps[step - 1]}`
+  previousButton.href = `/${steps[step - 1].name}`
 }
 else {
   previousButton.setAttribute('disabled', 'disabled')

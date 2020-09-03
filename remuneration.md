@@ -37,10 +37,10 @@ title: "Ecart de rémunération entre les femmes et les hommes"
     ]
     buildSelectOptions(document.querySelector('#field--motif'), motifOptions)
     const calculOptions = [
-      {value: 1, label: "Par niveau ou coefficient hiérarchique en application de la classification de branche"},
-      {value: 2, label: "Par niveau ou coefficient hiérarchique en application d'une autre méthode de cotation des postes"},
-      {value: 3, label: "Par catégorie socio-professionnelle"},
-      {value: 4, label: "L’indicateur n’est pas calculable"},
+      {value: "coef", label: "Par niveau ou coefficient hiérarchique en application de la classification de branche"},
+      {value: "autre", label: "Par niveau ou coefficient hiérarchique en application d'une autre méthode de cotation des postes"},
+      {value: "csp", label: "Par catégorie socio-professionnelle"},
+      {value: "nc", label: "L’indicateur n’est pas calculable"},
     ]
     buildRadioOptions(document.querySelector('#field--calcul'), calculOptions)
   }
