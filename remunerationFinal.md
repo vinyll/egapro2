@@ -13,6 +13,10 @@ title: "Ecart de rémunération entre les femmes et les hommes"
   <div class=row>{% include select.html name="remuneration-favorable" empty="true" label="Population envers laquelle l'écart est favorable" %}</div>
 </fieldset>
 
+<fieldset class=note>
+  <div class=row>{% include input.html type="number" name="remuneration-note" label="Nombre de points obtenus sur l'indicateur" min=0 max=40 %}</div>
+</fieldset>
+
 <script>
   document.onready = () => {
     const favorableOptions = [

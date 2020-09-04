@@ -120,6 +120,15 @@ button:focus {
 .row:not(:last-child) {
   margin-bottom: 1rem;
 }
+.note {
+  background-color: #FF0080;
+  color: white;
+  font-weight: bold;
+}
+.note input {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
 
 label {
   max-width: 50%;
