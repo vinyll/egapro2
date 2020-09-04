@@ -21,7 +21,7 @@ title: "Ecart de rémunération entre les femmes et les hommes"
 </fieldset>
 
 <fieldset>
-  <div class=row>{% include select.html name="motif" label="Précision du motif de non calculabilité de l'indicateur" %}</div>
+  <div class=row>{% include select.html name="motif" empty="true" label="Précision du motif de non calculabilité de l'indicateur" %}</div>
 </fieldset>
 
 <fieldset>
@@ -31,7 +31,6 @@ title: "Ecart de rémunération entre les femmes et les hommes"
 <script>
   document.onready = () => {
     const motifOptions = [
-      { value: '' },
       { value: '40', label: "Effectif des groupes valides inférieur à 40% de l'effectif total" },
       { value: 'autre', label: "Autre motif" }
     ]

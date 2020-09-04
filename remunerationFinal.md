@@ -1,0 +1,24 @@
+---
+layout: tunnel
+title: "Ecart de rémunération entre les femmes et les hommes"
+---
+
+<h1>{{ page.title }}</h1>
+
+<fieldset>
+  <div class=row>{% include input.html type="number" name="ecart-final-pourcentage" label="Résultat final en pourcentage (%) après application du seuil de pertinence à chaque catégorie" min=0 %}</div>
+</fieldset>
+
+<fieldset>
+  <div class=row>{% include select.html name="remuneration-favorable" empty="true" label="Population envers laquelle l'écart est favorable" %}</div>
+</fieldset>
+
+<script>
+  document.onready = () => {
+    const favorableOptions = [
+      { value: 'femmes', label: "Femmes" },
+      { value: 'hommes', label: "Hommes" }
+    ]
+    buildSelectOptions(document.querySelector('#field--remuneration-favorable'), favorableOptions)
+  }
+</script>
