@@ -56,6 +56,11 @@ main hgroup h3 {
 h3, h4 {
   margin: 0;
 }
+em {
+  color: #FF0080;
+  font-weight: bold;
+  font-style: normal;
+}
 
 nav {
   margin-top: 3rem;
