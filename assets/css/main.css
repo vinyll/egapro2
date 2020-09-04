@@ -129,6 +129,9 @@ button:focus {
   font-size: 1.1rem;
   font-weight: bold;
 }
+.note.subnote {
+  font-weight: normal;
+}
 
 label {
   max-width: 50%;
