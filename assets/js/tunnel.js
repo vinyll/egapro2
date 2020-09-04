@@ -22,7 +22,8 @@ const steps = [
   {name: 'remunerationAutre', nextStep: _ => 'remunerationFinal'},
   {name: 'remunerationCsp', nextStep: _ => 'remunerationFinal'},
   {name: 'remunerationFinal'},
-  {name: 'augmentation'}
+  {name: 'augmentation'},
+  {name: 'maternite'},
 ]
 
 const pageName = location.pathname.slice(1)
