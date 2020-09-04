@@ -83,6 +83,9 @@ fieldset[disabled] {
 label {
   margin-right: 2rem;
 }
+label:not(:first-child) {
+  margin-left: 2rem;
+}
 
 .warning {
   color: #c00;
@@ -140,6 +143,11 @@ label {
 input:not([type=radio]),
 select {
   width: 50%;
+}
+.row input:not([type=radio]),
+.row select {
+  max-width: 50%;
+  width: auto;
 }
 
 table {

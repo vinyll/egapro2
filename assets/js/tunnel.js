@@ -26,6 +26,7 @@ const steps = [
   {name: 'maternite'},
   {name: 'hautesremunerations'},
   {name: 'note'},
+  {name: 'resultat'}
 ]
 
 const pageName = location.pathname.slice(1)
