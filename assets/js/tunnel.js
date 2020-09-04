@@ -27,7 +27,8 @@ const steps = [
   {name: 'hautesremunerations'},
   {name: 'note'},
   {name: 'resultat'},
-  {name: 'validation'}
+  {name: 'validation'},
+  {name: 'transmission'}
 ]
 
 const pageName = location.pathname.slice(1)

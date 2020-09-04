@@ -56,10 +56,12 @@ main hgroup h3 {
 h3, h4 {
   margin: 0;
 }
-em {
+strong {
   color: #FF0080;
-  font-weight: bold;
+}
+em {
   font-style: normal;
+  text-decoration: underline;
 }
 
 nav {
