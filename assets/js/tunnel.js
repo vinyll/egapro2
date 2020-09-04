@@ -18,11 +18,15 @@ const steps = [
       return 'augmentation'
     }
   }},
+  {name: 'remunerationCoef', nextStep: _ => 'remunerationFinal'},
+  {name: 'remunerationAutre', nextStep: _ => 'remunerationFinal'},
+  {name: 'remunerationCsp', nextStep: _ => 'remunerationFinal'},
+  {name: 'remunerationFinal'},
   {name: 'augmentation'}
 ]
 
 const pageName = location.pathname.slice(1)
-const step = steps.findIndex(step => pageName.startsWith(step.name))
+const step = steps.findIndex(step => step.name === pageName)
 
 window.data = JSON.parse(localStorage.data || '{}')
 
