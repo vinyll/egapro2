@@ -1,4 +1,6 @@
-{% include label.html label=include.label name=include.name required=include.required %}
+{% if include.label %}
+  {% include label.html label=include.label name=include.name required=include.required %}
+{% endif %}
 <input
   id="field--{{ include.name }}"
   value="{{ include.value || '' }}"

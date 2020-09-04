@@ -130,6 +130,27 @@ select {
   width: 50%;
 }
 
+table {
+  border-collapse: collapse;
+}
+table th,
+table td {
+  border: 1px solid #FF0080;
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+table thead th,
+table td {
+  text-align: center;
+}
+table tbody tr:nth-of-type(even) {
+  background-color: white;
+}
+table thead th:first-child {
+  border: none;
+}
+
 @media screen and (min-width: 600px) {
   body {
     margin: 1rem auto;
