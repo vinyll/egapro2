@@ -2,6 +2,7 @@
 layout: tunnel
 title: "Année et périmètre retenus pour le calcul et la publication des indicateurs"
 ---
+
 <h1>{{ page.title }}</h1>
 
 <fieldset>
@@ -37,7 +38,7 @@ title: "Année et périmètre retenus pour le calcul et la publication des indic
   </div>
 </fieldset>
 
-<fieldset>
+<fieldset class="periode-reference">
   <div class=row>
     <label for="field-date">Date de début de la période de référence</label>
     <input id="field-date" type=date name=date min="2019-01-01" max="2019-12-31">
@@ -52,15 +53,17 @@ title: "Année et périmètre retenus pour le calcul et la publication des indic
 </fieldset>
 
 <script>
-  const annee = document.querySelector('[name=date]')
-  const date = new Date()
-  annee.min = `${date.getFullYear() - 1}-01-01`
-  annee.max = `${date.getFullYear() - 1}-12-31`
-  document.querySelector('[name=annee]').value = date.getFullYear() - 1
-  Array.from(document.querySelectorAll('[name=periode]')).forEach(function(radio) {
-    radio.addEventListener('change', function(event) {
-      const value = event.target.value
-      document.querySelector('#fieldset-date').disabled = value !== 'autre'
+  document.onready = () => {
+    const annee = document.querySelector('[name=date]')
+    const date = new Date()
+    annee.min = `${date.getFullYear() - 1}-01-01`
+    annee.max = `${date.getFullYear() - 1}-12-31`
+    document.querySelector('[name=annee]').value = date.getFullYear() - 1
+    Array.from(document.querySelectorAll('[name=periode]')).forEach(function(radio) {
+      radio.addEventListener('change', function(event) {
+        const value = event.target.value
+        document.querySelector('.periode-reference').disabled = value !== 'autre'
+      })
     })
-  })
+  }
 </script>
