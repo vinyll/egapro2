@@ -20,7 +20,7 @@ title: "Ecart de rémunération entre les femmes et les hommes"
   <div class=row>{% include input.html type="number" name='niveaux' label='Nombre de coefficients ou niveaux pour les modalités de calcul' min=1 max=50 %}</div>
 </fieldset>
 
-<fieldset>
+<fieldset class="non-calculable">
   <div class=row>{% include select.html name="motif" empty="true" label="Précision du motif de non calculabilité de l'indicateur" %}</div>
 </fieldset>
 
@@ -41,6 +41,14 @@ title: "Ecart de rémunération entre les femmes et les hommes"
       {value: "csp", label: "Par catégorie socio-professionnelle"},
       {value: "nc", label: "L’indicateur n’est pas calculable"},
     ]
-    buildRadioOptions(document.querySelector('#field--calcul'), calculOptions)
+    buildRadioOptions(document.querySelector('#field--calcul'), calculOptions, "csp")
+
+    document.querySelector('.non-calculable').disabled = !document.querySelector('[name=calcul][value="nc"]').checked
+    Array.from(document.querySelectorAll('[name=calcul]')).forEach(function(radio) {
+      radio.addEventListener('change', function(event) {
+        const value = event.target.value
+        document.querySelector('.non-calculable').disabled = value !== 'nc'
+      })
+    })
   }
 </script>
