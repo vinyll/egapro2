@@ -7,10 +7,8 @@
   type="{{ include.type || 'text' }}"
   name="{{ include.name }}"
   placeholder="{{ include.placeholder || include.label }}"
-  {% if pattern %}
-  pattern="{{ include.pattern || '.*' }}"
-  {% endif %}
-  {% if include.min %}min={{ include.min }}{% endif %}
-  {% if include.max %}max={{ include.max }}{% endif %}
+  {% if pattern %}pattern="{{ include.pattern || '.*' }}"{% endif %}
+  {% if include.min %}min="{{ include.min }}"{% endif %}
+  {% if include.max %}max="{{ include.max }}"{% endif %}
   {% if include.required %}required{% endif %}
 />

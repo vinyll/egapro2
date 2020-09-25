@@ -6,19 +6,19 @@ title: "Vous êtes une entreprise"
 
 <fieldset>
   <div class=row>
-    <div>{% include input.html name='nom' label='Raison Sociale' required=true %}</div>
+    <div>{% include input.html name='entreprise.nom' label='Raison Sociale' required=true %}</div>
   </div>
 </fieldset>
 
 <fieldset>
   <div class=row>
-    <div>{% include select.html name='naf' label='Code NAF' required=true %}</div>
+    <div>{% include select.html name='entreprise.naf' label='Code NAF' required=true %}</div>
   </div>
 </fieldset>
 
 <script>
   document.onready = function() {
-    const select = document.querySelector('#field--naf')
+    const select = selectField('entreprise.naf')
     const options = [{ value: '1', label: 'Yes' }]
     buildSelectOptions(select, options)
   }

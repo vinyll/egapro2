@@ -140,23 +140,23 @@
     "formValidated": false
   },
   "informationsEntreprise": {
-    "nomEntreprise": "",
-    "siren": "",
-    "codeNaf": "",
-    "region": "",
-    "departement": "",
-    "adresse": "",
-    "codePostal": "",
-    "commune": "",
+    "√ nomEntreprise": "",
+    "√ siren": "",
+    "√ codeNaf": "",
+    "√ region": "",
+    "√ departement": "",
+    "√ adresse": "",
+    "√ codePostal": "",
+    "√ commune": "",
     "structure": "Entreprise",
     "nomUES": "",
     "entreprisesUES": []
   },
   "informationsDeclarant": {
-    "nom": "",
-    "prenom": "",
-    "tel": "",
-    "email": "",
+    "√ nom": "",
+    "√ prenom": "",
+    "√ tel": "",
+    "√ email": "",
     "acceptationCGU": false
   },
   "declaration": {

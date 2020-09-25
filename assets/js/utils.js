@@ -1,3 +1,11 @@
+function init() {
+  window.app = window.app || {
+    data: {},
+    regions: null,
+  }
+}
+init()
+
 async function request(method, uri, body, options = {}) {
   if(!['get', 'head'].includes(method.toLowerCase()))
     options.body = body ? JSON.stringify(body) : ""
@@ -19,6 +27,7 @@ function redirect(url) {
 }
 
 function buildSelectOptions(select, list, value) {
+  select.innerHTML = ""
   const options = list.forEach((val) => {
     const option = document.createElement('option')
     option.value = val.value
@@ -38,6 +47,12 @@ function buildRadioOptions(optgroup, list, value) {
     const wrapped = optgroup.hasAttribute('option-block') ? `<div>${content}</div>` : content
     return wrapped
   }).join('')
+}
+
+function selectField(name) {
+  const field = document.getElementById(`field--${name}`)
+  if(!field) throw new Error(`field name "${name}" does not exist.`)
+  return field
 }
 
 // Shortcut event

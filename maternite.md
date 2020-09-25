@@ -33,12 +33,12 @@ title: "Pourcentage de salariées ayant bénéficié d'une augmentation dans l'a
       {value: "calculable", label: "oui"},
       {value: "nc", label: "non"},
     ]
-    buildRadioOptions(document.querySelector('#field--maternite-calculable'), calculOptions)
+    buildRadioOptions(selectField('maternite-calculable'), calculOptions)
     const motifsOptions = [
       { value: 'absretmat', label: "Absence de retours de congé de maternité"},
       { value: 'absaug', label: "Absence d'augmentations pendant ce congé"},
       { value: 'autre', label: "Autres motifs"},
     ]
-    buildSelectOptions(document.querySelector('#field--maternite-precision-motif'), motifsOptions)
+    buildSelectOptions(selectField('maternite-precision-motif'), motifsOptions)
   }
 </script>

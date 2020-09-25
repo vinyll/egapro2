@@ -13,12 +13,12 @@ title: "Validation de l'adresse de messagerie"
 <p>En cas d'échec, la procédure devra être reprise avec une autre adresse de messagerie.</p>
 
 <nav>
-  <a class=button href="/" previous>Modifier l'adresse e-mail</a>
+  <a class=button href="/" rel=prev>Modifier l'adresse e-mail</a>
 </nav>
 
 <script>
   document.body.addEventListener('load', () => {
-    document.querySelector('button[next]').disabled = !localStorage.token
+    document.querySelector('button[rel=next]').disabled = !localStorage.token
     window.validateForm = async function(form) {
       if(localStorage.token) return true
     }

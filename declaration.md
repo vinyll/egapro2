@@ -14,12 +14,12 @@ title: "Commencer la déclaration"
   document.onready = function() {
     const year = (new Date()).getFullYear()
     buildSelectOptions(
-      document.querySelector('[name="declaration.annee"]'),
+      selectField('declaration.annee'),
       [{ value: year-1, label: year-1 }, { value: year, label: year }],
       null
     )
 
-    document.querySelector('button[next]').disabled = !localStorage.token
+    document.querySelector('button[rel=next]').disabled = !localStorage.token
     window.validateForm = async function(form) {
       if(localStorage.token) return true
     }
@@ -30,8 +30,6 @@ title: "Commencer la déclaration"
     localStorage.siren = data['entreprise.siren']
 
     const response = await request('GET', `/declaration/${localStorage.siren}/${localStorage.annee}`)
-    if(response.ok) {
-      localStorage.data = JSON.stringify(response.data.data)
-    }
+    if(response.ok) window.app.data = JSON.stringify(response.data.data)
   }
 </script>

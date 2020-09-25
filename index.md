@@ -9,11 +9,11 @@ title: "A propos de la transmission des indicateurs et du niveau de résultat"
 <p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
 
 <div>
-  {% include input.html type='email' name='email' label='Adresse email de déclaration' required=true value='test@example.org' %}
+  {% include input.html type="email" name="email" label="Adresse email de déclaration" required=true value="test@example.org" %}
 </div>
 
 <nav>
-  <button next>Recevoir le lien de déclaration</button>
+  <button rel=next>Recevoir le lien de déclaration</button>
 </nav>
 
 <script>

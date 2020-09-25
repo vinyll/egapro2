@@ -49,18 +49,18 @@ title: "Ecart de taux d'augmentations individuelles entre les femmes et les homm
       {value: "calculable", label: "oui"},
       {value: "nc", label: "non"},
     ]
-    buildRadioOptions(document.querySelector('#field--augmentation-calculable'), calculOptions, "calculable")
+    buildRadioOptions(selectField('augmentation-calculable'), calculOptions, "calculable")
     const motifsOptions = [
       { value: 'asbaugi', label: "Absence d'augmentations individuelles"},
       { value: 'xxxxxx', label: "L'entreprise ne comporte pas au moins 5 femmes et 5 hommes"},
       { value: 'autre', label: "Autres motifs"},
     ]
-    buildSelectOptions(document.querySelector('#field--augmentation-precision-motif'), motifsOptions)
+    buildSelectOptions(selectField('augmentation-precision-motif'), motifsOptions)
     const favorableOptions = [
       { value: 'femmes', label: "Femmes" },
       { value: 'hommes', label: "Hommes" }
     ]
-    buildSelectOptions(document.querySelector('#field--augmentation-favorable'), favorableOptions)
+    buildSelectOptions(selectField('augmentation-favorable'), favorableOptions)
 
     const checkCalculable = (calculableSelector, motifSelector, precisionAutreSelector) => {
       const nonCalculableMotifFieldset = document.querySelector(motifSelector)
@@ -77,7 +77,7 @@ title: "Ecart de taux d'augmentations individuelles entre les femmes et les homm
     }
 
     checkCalculable('[value="nc"]', '#non-calculable', '#autre-motif')
-    
+
     Array.from(document.querySelectorAll('[name=augmentation-calculable]')).forEach(function(radio) {
       radio.addEventListener('change', function(event) {
         checkCalculable('[value="nc"]', '#non-calculable', '#autre-motif')

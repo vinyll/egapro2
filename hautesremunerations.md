@@ -23,6 +23,6 @@ title: "Nombre de salariés du sexe sous-représenté parmi les 10 salariés aya
       { value: 'femmes', label: "Femmes" },
       { value: 'hommes', label: "Hommes" }
     ]
-    buildSelectOptions(document.querySelector('#field--hautesremunerations-favorable'), favorableOptions)
+    buildSelectOptions(selectField('hautesremunerations-favorable'), favorableOptions)
   }
 </script>

@@ -34,14 +34,14 @@ title: "Ecart de rémunération entre les femmes et les hommes"
       { value: '40', label: "Effectif des groupes valides inférieur à 40% de l'effectif total" },
       { value: 'autre', label: "Autre motif" }
     ]
-    buildSelectOptions(document.querySelector('#field--motif'), motifOptions)
+    buildSelectOptions(selectField('motif'), motifOptions)
     const calculOptions = [
       {value: "coef", label: "Par niveau ou coefficient hiérarchique en application de la classification de branche"},
       {value: "autre", label: "Par niveau ou coefficient hiérarchique en application d'une autre méthode de cotation des postes"},
       {value: "csp", label: "Par catégorie socio-professionnelle"},
       {value: "nc", label: "L’indicateur n’est pas calculable"},
     ]
-    buildRadioOptions(document.querySelector('#field--calcul'), calculOptions, "csp")
+    buildRadioOptions(selectField('calcul'), calculOptions, "csp")
 
     document.querySelector('.non-calculable').disabled = !document.querySelector('[name=calcul][value="nc"]').checked
     Array.from(document.querySelectorAll('[name=calcul]')).forEach(function(radio) {

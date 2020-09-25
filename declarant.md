@@ -18,8 +18,8 @@ title: "Identification du déclarant pour tout contact ultérieur"
 
 <fieldset>
   <p>Adresse de l'entreprise déclarante ou siège de l'UES</p>
-  <div class=row>
-    <div>{% include select.html name="entreprise.region" label="Région" dataset="regions" required=true %}</div>
+  <div class=row id="departement-selector">
+    <div>{% include select.html name="entreprise.region" label="Région" required=true %}</div>
     <div>{% include select.html name="entreprise.departement" label="Département" required=true %}</div>
   </div>
 
@@ -34,14 +34,31 @@ title: "Identification du déclarant pour tout contact ultérieur"
 </fieldset>
 
 <script>
-  document.onready = function() {
-    document.getElementById('field--entreprise.region').addEventListener('change', (event) => {
-      const value = event.target.value
-      console.debug(`region ${value} was selected.`)
-      const dptSelect = document.getElementById('field--entreprise.departement')
-      const dptList = event.target.selectedOptions[0].selectedData
-        .map(dptName => ({value: dptName, label: dptName}))
-      buildSelectOptions(dptSelect, dptList, '')
-    })
+  const regionSelect = selectField('entreprise.region')
+  regionSelect.addEventListener('change', loadDepartments)
+  const departmentSelect = selectField('entreprise.departement')
+
+  document.onready = async () => {
+    if(!window.app.regions) {
+      const response = await fetch('/datasets/regions.json')
+      window.app.regions = await response.json()
+    }
+    dataLoaded()
   }
+
+  function dataLoaded() {
+    const regionsData = Object.keys(window.app.regions).map(region => ({label: region, value: region}))
+    buildSelectOptions(regionSelect, regionsData, window.data['entreprise.region'])
+
+    if(window.data['entreprise.region']) {
+      loadDepartments()
+    }
+  }
+
+  function loadDepartments() {
+    const region = regionSelect.value
+    const departments = window.app.regions[region].map(r => ({ label: r, value: r }))
+    buildSelectOptions(departmentSelect, departments, window.data['entreprise.departement'])
+  }
+
 </script>

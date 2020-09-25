@@ -1,7 +1,7 @@
-const form = document.querySelector('#page-form')
+const form = document.getElementById('page-form')
 const progress = document.querySelector('progress')
-const previousButton = document.querySelector('a[previous]')
-const nextButton = document.querySelector('button[next]')
+const previousButton = document.querySelector('a[rel=prev]')
+const nextButton = document.querySelector('button[rel=next]')
 const steps = [
    {name: 'declaration'},
    {name: 'declarant'},

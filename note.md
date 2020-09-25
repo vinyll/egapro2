@@ -28,6 +28,6 @@ title: "Niveau de résultat global"
       { value: 'envisagees', label: "Mesures envisagées"},
       { value: 'non-envisagees', label: "Mesures non envisagées"},
     ]
-    buildSelectOptions(document.querySelector('#field--note-mesures-correction'), mesuresCorrectionOptions)
+    buildSelectOptions(selectField('note-mesures-correction'), mesuresCorrectionOptions)
   }
 </script>

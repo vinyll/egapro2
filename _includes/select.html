@@ -9,22 +9,3 @@
   {% else %}
   {% endif %}
 </select>
-
-{% if include.dataset %}
-<script>
-  fetch('/datasets/{{ include.dataset }}.json')
-  .then(function(r){ return r.json() })
-  .then(function(data) {
-    var select = document.getElementById('field--{{include.name}}')
-    for(var k in data) {
-      var option = document.createElement('option')
-      option.value = data[k].value
-      option.textContent = data[k].name
-      option.value = k
-      option.textContent = k
-      option.selectedData = data[k]
-      select.appendChild(option)
-    }
-  })
-</script>
-{% endif %}

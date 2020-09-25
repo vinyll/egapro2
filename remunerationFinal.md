@@ -23,6 +23,6 @@ title: "Ecart de rémunération entre les femmes et les hommes"
       { value: 'femmes', label: "Femmes" },
       { value: 'hommes', label: "Hommes" }
     ]
-    buildSelectOptions(document.querySelector('#field--remuneration-favorable'), favorableOptions)
+    buildSelectOptions(selectField('remuneration-favorable'), favorableOptions)
   }
 </script>
