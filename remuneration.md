@@ -6,26 +6,26 @@ title: "Ecart de rémunération entre les femmes et les hommes"
 
 <fieldset>
   <div class=row>
-    <div>{% include radios.html name='calcul' label="Modalités de calcul de l'indicateur relatif à l'écart de rémunération entre les femmes et les hommes" required="true" block="true" %}</div>
+    <div>{% include radios.html name="indicateur.calcul" label="Modalités de calcul de l'indicateur relatif à l'écart de rémunération entre les femmes et les hommes" required="true" block="true" %}</div>
   </div>
 </fieldset>
 
-<fieldset>
+<fieldset id="fieldset-cse">
   <div class=row>
-    {% include input.html type="date" name='cse' label='Date de consultation au CSE' required=true %}
+    {% include input.html type="date" name="indicateur.cse" label="Date de consultation au CSE" required=true %}
   </div>
 </fieldset>
 
-<fieldset>
-  <div class=row>{% include input.html type="number" name='niveaux' label='Nombre de coefficients ou niveaux pour les modalités de calcul' min=1 max=50 %}</div>
+<fieldset id="fieldset-niveaux">
+  <div class=row>{% include input.html type="number" name="indicateur.niveaux" label="Nombre de coefficients ou niveaux pour les modalités de calcul" min=1 max=50 %}</div>
 </fieldset>
 
-<fieldset class="non-calculable">
-  <div class=row>{% include select.html name="motif" empty="true" label="Précision du motif de non calculabilité de l'indicateur" %}</div>
+<fieldset id="fieldset-motif">
+  <div class=row>{% include select.html name="indicateur.motif" empty="true" label="Précision du motif de non calculabilité de l'indicateur" %}</div>
 </fieldset>
 
-<fieldset>
-  <div class=row>{% include textarea.html name="motif" label="Préciser le motif" %}</div>
+<fieldset id="fieldset-autre_motif">
+  <div class=row>{% include textarea.html name="indicateur.autre_motif" label="Préciser le motif" %}</div>
 </fieldset>
 
 <script>
@@ -34,21 +34,31 @@ title: "Ecart de rémunération entre les femmes et les hommes"
       { value: '40', label: "Effectif des groupes valides inférieur à 40% de l'effectif total" },
       { value: 'autre', label: "Autre motif" }
     ]
-    buildSelectOptions(selectField('motif'), motifOptions)
+    buildSelectOptions(selectField('indicateur.motif'), motifOptions)
     const calculOptions = [
       {value: "coef", label: "Par niveau ou coefficient hiérarchique en application de la classification de branche"},
       {value: "autre", label: "Par niveau ou coefficient hiérarchique en application d'une autre méthode de cotation des postes"},
       {value: "csp", label: "Par catégorie socio-professionnelle"},
       {value: "nc", label: "L’indicateur n’est pas calculable"},
     ]
-    buildRadioOptions(selectField('calcul'), calculOptions, "csp")
+    buildRadioOptions(selectField('indicateur.calcul'), calculOptions, "csp")
 
-    document.querySelector('.non-calculable').disabled = !document.querySelector('[name=calcul][value="nc"]').checked
-    Array.from(document.querySelectorAll('[name=calcul]')).forEach(function(radio) {
-      radio.addEventListener('change', function(event) {
-        const value = event.target.value
-        document.querySelector('.non-calculable').disabled = value !== 'nc'
-      })
-    })
+    const switcher = selectField('indicateur.calcul')
+    const indicateurMotif = selectField('indicateur.motif')
+    toggleFields()
+    switcher.addEventListener('change', toggleFields)
+    indicateurMotif.addEventListener('change', toggleFields)
+
+    function toggleFields() {
+      const value = document.querySelector('[name="indicateur.calcul"]:checked').value
+      toggleField('#fieldset-cse', ['coef', 'autre'].includes(value))
+      toggleField('#fieldset-niveaux', ['coef', 'autre'].includes(value))
+      toggleField('#fieldset-motif', value === 'nc')
+      toggleField('#fieldset-autre_motif', value === 'nc' && indicateurMotif.value === 'autre')
+    }
+
+    function toggleField(selector, enabled) {
+      document.querySelector(selector).disabled = !enabled
+    }
   }
 </script>
