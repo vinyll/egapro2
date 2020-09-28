@@ -11,7 +11,7 @@ async function request(method, uri, body, options = {}) {
     options.body = body ? JSON.stringify(body) : ""
   options.method = method
   options.headers = { 'API-KEY': localStorage.token }
-  const response = await fetch(`${apiURL}${uri}`, options)
+  const response = await fetch(`${apiUrl}${uri}`, options)
   try {
     response.data = await response.json()
   }
