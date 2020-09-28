@@ -11,7 +11,7 @@ async function request(method, uri, body, options = {}) {
     options.body = body ? JSON.stringify(body) : ""
   options.method = method
   options.headers = { 'API-KEY': localStorage.token }
-  const response = await fetch(`http://localhost:2626${uri}`, options)
+  const response = await fetch(`${apiURL}${uri}`, options)
   try {
     response.data = await response.json()
   }
@@ -41,7 +41,7 @@ function buildRadioOptions(optgroup, list, value) {
   const name = optgroup.getAttribute('name')
   optgroup.innerHTML = list.map((val) => {
     const content = `<label>
-    <input type="radio" id="field--${name}" name="${name}" value="${val.value}" ${val.value == value ? 'checked' : ''}>
+    <input type="radio" name="${name}" value="${val.value}" ${val.value == value ? 'checked' : ''}>
     ${val.label}
     </label>`
     const wrapped = optgroup.hasAttribute('option-block') ? `<div>${content}</div>` : content

@@ -50,9 +50,7 @@ title: "Identification du déclarant pour tout contact ultérieur"
     const regionsData = Object.keys(window.app.regions).map(region => ({label: region, value: region}))
     buildSelectOptions(regionSelect, regionsData, window.data['entreprise.region'])
 
-    if(window.data['entreprise.region']) {
-      loadDepartments()
-    }
+    if(window.data['entreprise.region']) loadDepartments()
   }
 
   function loadDepartments() {

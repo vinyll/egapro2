@@ -8,7 +8,11 @@ layout: default
 <nav>
   <a class=button href="/" rel=prev>Précédent</a>
   <progress max=0 value=0></progress>
+  {% if page.nextButtonLabel %}
+  <button rel=next>{{ page.nextButtonLabel }}</button>
+  {% else %}
   <button rel=next>Suivant</button>
+  {% endif %}
 </nav>
 
 <!-- tunnel.js uses DOM and should be loaded last -->

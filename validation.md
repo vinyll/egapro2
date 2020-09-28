@@ -1,6 +1,7 @@
 ---
 layout: tunnel
 title: "Validation de la procédure de transmission de vos indicateurs"
+nextButtonLabel: "Valider et transmettre les résultats"
 ---
 
 <h1>{{ page.title }}</h1>

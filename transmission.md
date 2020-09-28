@@ -1,5 +1,5 @@
 ---
-layout: tunnel
+layout: intro
 title: "Transmission de la procédure"
 ---
 
