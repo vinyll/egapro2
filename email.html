@@ -1,0 +1,33 @@
+---
+layout: intro
+title: "Validation de l'adresse de messagerie"
+---
+<h1>{{ page.title }}</h1>
+
+<p>
+L’e-mail saisi doit être valide, pour pouvoir permettre de poursuivre la transmission des informations requises, il doit correspondre à celui de la personne à contacter par les services de l’inspection du travail en cas de besoin et sera celui sur lequel sera adressé l’accusé de réception en fin de procédure
+</p>
+
+<div>
+  {% include input.html type="email" name="email" label="Adresse email" required=true %}
+</div>
+
+<blockquote class="warning">
+<strong>Attention : en cas d'adresse erronée, vous ne pourrez pas remplir le formulaire</strong>
+</blockquote>
+
+<nav>
+  <button rel=next>Valider mon e-mail</button>
+</nav>
+
+<script>
+  document.getElementById('page-form').addEventListener('submit', async (event) => {
+    event.preventDefault()
+    const email = event.target.email.value
+    const response = await request('post', '/token', { email })
+    if(response.ok) {
+      localStorage.email = email
+      redirect('/validation-email')
+    }
+  })
+</script>

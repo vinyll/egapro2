@@ -63,6 +63,9 @@ em {
   font-style: normal;
   text-decoration: underline;
 }
+strong a {
+  color: inherit;
+}
 
 nav {
   margin-top: 3rem;
@@ -176,6 +179,10 @@ table tbody tr:nth-of-type(even) {
 }
 table thead th:first-child {
   border: none;
+}
+
+#intro nav {
+  justify-content: center;
 }
 
 @media screen and (min-width: 600px) {
