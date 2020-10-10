@@ -5,23 +5,22 @@ const nextButton = document.querySelector('button[rel=next]')
 const steps = [
    {name: 'declaration'},
    {name: 'declarant'},
-   {name: 'annee'},
-   {name: 'entreprise'},
-   {name: 'remuneration', nextStep: data => {
-    if (data.calcul === "coef") {
-      return 'remunerationCoef'
-    } else if (data.calcul === "autre") {
-      return 'remunerationAutre'
-    } else if (data.calcul === "csp") {
-      return 'remunerationCsp'
-    } else {
-      return 'augmentation'
-    }
+   {name: 'annee', nextStep: data => {
+    if(data['entreprise.structure'] === 'ues') return 'ues'
+    return 'entreprise'
   }},
-  {name: 'remunerationCoef', nextStep: _ => 'remunerationFinal'},
-  {name: 'remunerationAutre', nextStep: _ => 'remunerationFinal'},
-  {name: 'remunerationCsp', nextStep: _ => 'remunerationFinal'},
-  {name: 'remunerationFinal'},
+  {name: 'ues'},
+  {name: 'ues-composition', nextStep: _ => 'remuneration'},
+  {name: 'entreprise', nextStep: _ => 'remuneration'},
+  {name: 'remuneration', nextStep: data => {
+    if (data['indicateur.calcul'] === "coef") return 'remuneration-coef'
+    if (data['indicateur.calcul'] === "csp") return 'remuneration-csp'
+    return 'augmentation'
+  }},
+  {name: 'remuneration-coef', nextStep: _ => 'remuneration-final'},
+  {name: 'remuneration-autre', nextStep: _ => 'remuneration-final'},
+  {name: 'remuneration-csp', nextStep: _ => 'remuneration-final'},
+  {name: 'remuneration-final'},
   {name: 'augmentation'},
   {name: 'maternite'},
   {name: 'hautesremunerations'},
@@ -91,7 +90,8 @@ function formToData(form) {
 }
 
 async function sendData(data) {
-  const response = await request('PUT', `/declaration/${localStorage.siren}/${localStorage.annee}`, data)
+  // const response = await request('PUT', `/declaration/${localStorage.siren}/${localStorage.annee}`, data)
+  const response = { ok: true }  // while server is not available in staging
   if(response.ok) localStorage.data = JSON.stringify(Object.assign(window.data, data))
   return response
 }
