@@ -1,0 +1,44 @@
+---
+layout: tunnel
+title: "Pourcentage de salariées ayant bénéficié d'une augmentation dans l'année suivant leur retour de congé maternité"
+---
+
+<h1>{{ page.title }}</h1>
+
+<fieldset>
+  <div class=row>
+    <div>{% include radios.html name='maternite.calculable' label="L'indicateur est-il calculable" required="true" %}</div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class=row>{% include select.html name="maternite.precision_motif" empty="true" label="Précision du motif" %}</div>
+</fieldset>
+
+<fieldset>
+  <div class=row>{% include textarea.html name="maternite.precision_autre_motif" label='Préciser "autres motifs"' %}</div>
+</fieldset>
+
+<fieldset>
+  <div class=row>{% include input.html type="number" name="maternite.resultat_pourcentage" label="Résultat final en pourcentage (%)" min=0 max=40 %}</div>
+</fieldset>
+
+<fieldset class=note>
+  <div class=row>{% include input.html type="number" name="maternite.note" label="Nombre de points obtenus sur l'indicateur" min=0 max=15 %}</div>
+</fieldset>
+
+<script>
+  document.onready = () => {
+    const calculOptions = [
+      {value: "calculable", label: "oui"},
+      {value: "nc", label: "non"},
+    ]
+    buildRadioOptions(selectField('maternite.calculable'), calculOptions)
+    const motifsOptions = [
+      { value: 'absretmat', label: "Absence de retours de congé de maternité"},
+      { value: 'absaug', label: "Absence d'augmentations pendant ce congé"},
+      { value: 'autre', label: "Autres motifs"},
+    ]
+    buildSelectOptions(selectField('maternite.precision_motif'), motifsOptions)
+  }
+</script>

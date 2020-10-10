@@ -1,0 +1,30 @@
+---
+layout: tunnel
+title: "Raison sociale et numéro de SIREN de chacune des entreprises composant l'UES"
+---
+<h1>{{ page.title }}</h1>
+
+<fieldset id=container>
+  <template id=looper>
+    <div class=row>
+      {% include input.html name="ues.nom_{index}" label="Raison sociale #{index}" required=true value="{nom}" %}
+      {% include input.html name="ues.siren_{index}" label="SIREN #{index}" required=true value="{siren}" %}
+    </div>
+  </template>
+</fieldset>
+
+<script>
+  document.onready = function() {
+    const template = document.getElementById('looper').innerHTML
+    const container = document.getElementById('container')
+    const count = Number(window.data['ues.nombre_entreprises'])
+    let html = ''
+    for(let i = 1; i <= count; i++) {
+      html += template
+        .replaceAll('{index}', i)
+        .replaceAll('{nom}', window.data[`ues.nom_${i}`])
+        .replaceAll('{siren}', window.data[`ues.siren_${i}`])
+    }
+    container.innerHTML = html
+  }
+</script>

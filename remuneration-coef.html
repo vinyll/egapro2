@@ -1,0 +1,59 @@
+---
+layout: tunnel
+title: "Ecart de rémunération entre les femmes et les hommes par niveau ou coefficient hiérarchique"
+---
+
+<hgroup>
+  <h1>{{ page.title }}</h1>
+  <h3>Il faut saisir les écarts de rémunération en % <em>avant</em> application du seuil de pertinence</h3>
+</hgroup>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Moins de 30 ans</th>
+      <th>De 30 à 39 ans</th>
+      <th>De 40 à 49 ans</th>
+      <th>50 ans et plus</th>
+    </tr>
+  </thead>
+
+  <tbody id="container">
+    <template id="looper">
+      <tr>
+        <th>Niveau - Coefficient {index} (en %)</th>
+        <td>
+          {% include input.html type="number" name="indicateur.30-moins" value="{indicateur.30-moins}" min=0 required=true %}
+        </td>
+        <td>
+          {% include input.html type="number" name="indicateur.30-39" value="{indicateur.30-39}" min=0 required=true %}
+        </td>
+        <td>
+          {% include input.html type="number" name="indicateur.40-49" value="{indicateur.40-49}" min=0 required=true %}
+        </td>
+        <td>
+          {% include input.html type="number" name="indicateur.50-plus" value="{indicateur.50-plus}" min=0 required=true %}
+        </td>
+      </tr>
+    </template>
+  </tbody>
+</table>
+
+<script>
+  document.onready = (() => {
+    const container = document.getElementById('container')
+    const template = document.getElementById('looper').innerHTML
+    const count = Number(window.data['indicateur.niveaux'])
+    const content = Array(count).fill().map((_, i) => {
+      const index = i + 1
+      return template
+        .replaceAll('{index}', index)
+        .replaceAll('{indicateur.30-moins}', window.data['indicateur.30-moins'])
+        .replaceAll('{indicateur.30-39}', window.data['indicateur.30-39'])
+        .replaceAll('{indicateur.40-49}', window.data['indicateur.40-49'])
+        .replaceAll('{indicateur.50-plus}', window.data['indicateur.50-plus'])
+    }).join('')
+    container.innerHTML = content
+  })
+</script>
