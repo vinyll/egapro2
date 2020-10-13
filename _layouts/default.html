@@ -3,19 +3,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <title>{{ page.title }} - {{ site.title }}</title>
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/solen.css">
 <script src="/config.js"></script>
 <script src="/assets/js/utils.js"></script>
 
-<form id="page-form" action="{{ page.url }}">
-  <header>
-    <img src="/assets/img/marianne.jpg" alt="Marianne">
+<header>
+  <div>
+    <img src="/assets/img/marianne.png" alt="Marianne">
     <hgroup>
       <h1>Égalité professionnelle</h1>
       <h2>Index 2020 au titre de l'année 2019</h2>
     </hgroup>
-  </header>
+  </div>
+</header>
 
+<form class=main id="page-form" action="{{ page.url }}">
   {{ content }}
 </form>
 
