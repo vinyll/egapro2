@@ -22,9 +22,9 @@ title: "Année et périmètre retenus pour le calcul et la publication des indic
 <fieldset>
   <div class=row>
     <h4>Tranches d'effectifs</h4>
-    <label><input type=radio name="informations.effectifs" value="50"> De 50 à 100 inclus</label>
-    <label><input type=radio name="informations.effectifs" value="250"> De 251 à 999 inclus</label>
-    <label><input type=radio name="informations.effectifs" value="1000"> 1000 ou plus</label>
+    <div id="informations.effectifs">
+      <label><input type=radio name="informations.effectifs" value="{value}"> {label}</label>
+    </div>
   </div>
 </fieldset>
 
@@ -63,5 +63,14 @@ title: "Année et périmètre retenus pour le calcul et la publication des indic
         selectField('periode.type').disabled = value !== 'autre'
       })
     })
+
+    const container = document.getElementById('informations.effectifs')
+    const template = container.innerHTML
+    const content = Object.entries(window.app.config.effectifs).map(([key, value]) => {
+      return template
+        .replaceAll('{value}', key)
+        .replaceAll('{label}', value)
+    }).join('')
+    container.innerHTML = content
   }
 </script>

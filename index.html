@@ -1,19 +1,11 @@
----
-layout: intro
-title: "A propos de la transmission des indicateurs et du niveau de résultat"
----
-<p>Les informations recueillies sur ce formulaire répondent à l’obligation de transmission aux services du ministre chargé du travail des indicateurs et du niveau de résultat en matière d’écart de rémunération entre les femmes et les hommes prévue à l’article D.1142-5 du code du travail au 1er mars 2020.</p>
-
-<p class=warning>Attention, si vous avez déjà fait votre déclaration sur le site Index Egapro, vous ne devez pas faire une nouvelle déclaration ici.</p>
-
-<nav>
-  <a href="confidentialite" class="button" rel=next>Suivant</a>
-</nav>
-
+<script src="/assets/js/utils.js"></script>
 <script>
   const tokenParam = '?token='
+  let token = false
   if(location.search.startsWith(tokenParam)) {
+    token = true
     localStorage.token = location.search.slice(tokenParam.length)
-    redirect('/declaration')
   }
+  else if (localStorage.token) token = true
+  token ? redirect('/declaration') : redirect('/presentation')
 </script>

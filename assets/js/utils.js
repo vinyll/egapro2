@@ -1,10 +1,18 @@
-function init() {
+async function loadApp() {
   window.app = window.app || {
     data: {},
     regions: null,
+    config: {},
+  }
+
+  const response = await request('GET', '/config')
+  if(response.ok) {
+    Object.entries(response.data).forEach(([key, value]) => {
+      window.app.config[key.toLowerCase()] = value
+    })
   }
 }
-init()
+
 
 async function request(method, uri, body, options = {}) {
   if(!['get', 'head'].includes(method.toLowerCase()))
@@ -56,6 +64,7 @@ function selectField(name) {
 }
 
 // Shortcut event
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadApp()
   document.onready && document.onready()
 })
