@@ -19,7 +19,7 @@ title: "Identification du déclarant pour tout contact ultérieur"
 <fieldset>
   <p>Adresse de l'entreprise déclarante ou siège de l'UES</p>
   <div class=row id="departement-selector">
-    <div>{% include select.html name="entreprise.region" label="Région" required=true %}</div>
+    <div>{% include select.html name="entreprise.region" label="Région" required=true empty=true %}</div>
     <div>{% include select.html name="entreprise.departement" label="Département" required=true %}</div>
   </div>
 

@@ -6,7 +6,7 @@ async function loadApp() {
   }
 
   const response = await request('GET', '/config')
-  if(response.ok) {
+  if(!response.ok) {
     Object.entries(response.data).forEach(([key, value]) => {
       window.app.config[key.toLowerCase()] = value
     })
