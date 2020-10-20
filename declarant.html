@@ -1,19 +1,19 @@
 ---
 layout: tunnel
-title: "Identification du déclarant pour tout contact ultérieur"
+title: "Informations déclarant"
 ---
 <h1>{{ page.title }}</h1>
 
 <fieldset>
   <!-- fieldset display flex can't work in Chromium -->
   <div class=row>
-    <div>{% include input.html name="declarant.nom" label="Nom" required=true %}</div>
-    <div>{% include input.html name="declarant.prenom" label="Prénom" required=true %}</div>
+    <div>{% include input.html name="declarant.nom" label="Nom du déclarant" required=true %}</div>
+    <div>{% include input.html name="declarant.prenom" label="Prénom du déclarant" required=true %}</div>
   </div>
 </fieldset>
 
 <fieldset>
-  {% include input.html name="declarant.tel" label="Téléphone professionel (10 chiffres)" %}
+  {% include input.html name="declarant.tel" label="Numéro de téléphone" required=true %}
 </fieldset>
 
 <fieldset>
