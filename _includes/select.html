@@ -3,9 +3,6 @@
   id="field--{{include.name}}"
   name="{{include.name}}"
   {% if include.required %}required{% endif %}
+  {% if include.empty %}empty{% endif %}
 >
-  {% if include.empty %}
-  <option value=""> --- </option>
-  {% else %}
-  {% endif %}
 </select>
